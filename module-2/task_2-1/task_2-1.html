@@ -1,54 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Task 2-1</title>
-</head>
-<body>
-  <h1>JavaScript Variables and Objects</h1>
+<html lang="en" style="display: table; margin: auto; zoom: 1">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Task 2.1</title>
+  </head>
+  <body style="display: table-cell; vertical-align: middle">
+    <h2><label for="txtOut">Output from Task 2.1:</label></h2>
+    <div style="padding: 10px; min-width: 512px; border: darkblue thin solid; background-color: antiquewhite; font-family: 'Courier New', serif">
+      <span id="txtOut"></span>
+    </div>
 
-  <script>
-    /* Aktiver strict mode for å fange feil
-    "use strict";
+    		<script type="module" src="./task_2-1.mjs" defer></script>
 
-    // Part 2 og 3: Variabler og konstanter
-    let age = 18;                 // variabel (kan endres)
-    const name = "Natalie";       // konstant (kan ikke endres)
-    let price = 19.99;            // desimaltall
-    let greeting = "Hello!";      // string (tekst)
-    const birthYear = 2006;       // konstant med tall
+    
 
-    */ 
-   // Et objekt med andre variabler
-    let student = {
-      firstName: "Natalie",
-      age: 18,
-      active: true
-    };
 
-    console.log("Age:", age);
-    console.log("Name:", name);
-    console.log("Price:", price);
-    console.log("Greeting:", greeting);
-    console.log("Birth Year:", birthYear);
-    console.log("Student object:", student);
-
-    // Part 4: Implicit variable declaration (uten let/const/var)
-    // Dette gir en FEIL i strict mode
-    try {
-      valuePI = 3.14;   // implicit declaration
-      console.log("valuePI:", valuePI);
-    } catch (error) {
-      console.error("Implicit declaration error:", error.message);
-    }
-
-    // Part 5: Forsøk på å endre en konstant
-    const myNumber = 100;
-    try {
-      myNumber = 200;   // prøver å endre konstant
-    } catch (error) {
-      console.error("Constant error:", error.message);
-    }
-
-</script>
 </body>
 </html>
