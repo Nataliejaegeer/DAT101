@@ -2,65 +2,20 @@
 import { printOut, newLine } from "../../common/script/utils.mjs";
 
 
-/* Aktiver strict mode for å fange feil
-    "use strict";
-
-    // Part 2 og 3: Variabler og konstanter
-    let age = 18;                 // variabel (kan endres)
-    const name = "Natalie";       // konstant (kan ikke endres)
-    let price = 19.99;            // desimaltall
-    let greeting = "Hello!";      // string (tekst)
-    const birthYear = 2006;       // konstant med tall
-
-    */ 
-   // Et objekt med andre variabler
-    let student = {
-      firstName: "Natalie",
-      age: 18,
-      female: true
-    };
 
 
-
-
-    console.log("Age:", student.age);
-    //console.log("Name:", name);
-    //console.log("Price:", price);
-    //console.log("Greeting:", greeting);
-    //console.log("Birth Year:", birthYear);
-    //console.log("Student object:", student);
-
-    // Part 4: Implicit variable declaration (uten let/const/var)
-    // Dette gir en FEIL i strict mode
-    
-    
-    /*
-    try {
-      valuePI = 3.14;   // implicit declaration
-      console.log("valuePI:", valuePI);
-    } catch (error) {
-      console.error("Implicit declaration error:", error.message);
-    }
-
-    // Part 5: Forsøk på å endre en konstant
-    const myNumber = 100;
-    try {
-      myNumber = 200;   // prøver å endre konstant
-    } catch (error) {
-      console.error("Constant error:", error.message);
-    }
-*/
 
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+/*
 <body>
   <h1>Hei</h1>
   <script>
     // JavaScript kommer her
   </script>
 </body>
-
+*/
 printOut("Replace this with you answer!");
 printOut(newLine);
 
@@ -101,10 +56,10 @@ printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-const pi = 3.14;
-pi = 4;
+const pi2 = 3.14;
+ pi2 = 4
 
-printOut("Replace this with you answer!");
+printOut("jeg kunne ikke endre pi2 når jeg hadde gitt den en verdi!");
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
