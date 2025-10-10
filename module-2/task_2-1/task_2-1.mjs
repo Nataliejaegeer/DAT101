@@ -17,8 +17,11 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
     let student = {
       firstName: "Natalie",
       age: 18,
-      active: true
+      female: true
     };
+
+
+
 
     console.log("Age:", student.age);
     //console.log("Name:", name);
@@ -51,30 +54,56 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+<body>
+  <h1>Hei</h1>
+  <script>
+    // JavaScript kommer her
+  </script>
+</body>
+
 printOut("Replace this with you answer!");
-let name_1 = "test";
-let name_2;
-printOut(name_1)
-// printOut(student.firstName);
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+var navn = "Natalie";  // gammel måte
+let alder = 19;         // ny og anbefalt måte
+const pi = 3.14;        // konstant som ikke kan endres
 printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+let tall = 10;
+let flyttall = 3.5;
+let tekst = "Hei verden!";
+const farge = "blå";
+
+let person = {
+  navn: "Natalie",
+  alder: 18,
+  hobby: "foto"
+};
+
+console.log(person);
 printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+const test ={
+    valuePI: 3.14
+}
+printOut(test.valuePI)
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+const pi = 3.14;
+pi = 4;
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
