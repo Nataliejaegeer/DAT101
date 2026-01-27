@@ -53,7 +53,7 @@ export class THero extends TSprite {
      menubar.stopSound();
      this.animationSpeed = 0;
      this.#sfGameOver = new TSoundFile(fnGameOver);
-      this.#sfGameOver.play();
+     this.#sfGameOver.play();
    }
 } else if (EGameStatus.state === EGameStatus.idle) {
    this.y += this.#wave.value;

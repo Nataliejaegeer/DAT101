@@ -22,8 +22,6 @@ export class TBait extends TSprite {
         }else{
             this.translate(this.#speed, this.#wave.value);
 
-
-
         
         }
     }

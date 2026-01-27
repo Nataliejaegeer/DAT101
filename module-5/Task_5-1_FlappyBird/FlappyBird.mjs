@@ -36,7 +36,8 @@ const background = new TBackground(spcvs, SpriteInfoList);
 export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
 const baits = [];
-const menu = new TMenu(spcvs, SpriteInfoList);
+export const menu = new TMenu(spcvs, SpriteInfoList);
+let obstaclePassed = false; 
 
 //--------------- Functions ----------------------------------------------//
 export function startGame() {
@@ -74,7 +75,7 @@ function animateGame() {
     }
   }
   if(eaten >=0){
-    console.log("eaten!");
+    console.log("Eaten!");
     baits.splice(eaten, 1);
     hero.eat();
   }
@@ -87,7 +88,13 @@ function animateGame() {
       obstacle.animate();
       if (obstacle.x < -50) {
         deliteObstacle = true;
+        obstaclePassed = false;
+      }else if ((obstacle.width) < hero.x) {
+        if (!obstaclePassed) {
+        menu.incGameScore(1);
+        obstaclePassed = true;
       }
+    }
     }
     if (deliteObstacle) {
       obstacles.splice(0, 1);

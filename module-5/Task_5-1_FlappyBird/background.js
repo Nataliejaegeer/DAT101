@@ -13,7 +13,7 @@ export class TBackground {
     } 
     drawbackground() {
         this.#spriteBackground.draw();
-        this.#spriteGround.draw();
+        
     }
 
     drawGround() {

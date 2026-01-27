@@ -25,6 +25,10 @@ export class TMenu {
         this.#spGameScore.alpha = 0.5;
     }
 
+    incGameScore(aScore){
+        this.#spGameScore.value += aScore;
+
+    }
     stopSound() {
         this.#sfRunning.stop();
     }

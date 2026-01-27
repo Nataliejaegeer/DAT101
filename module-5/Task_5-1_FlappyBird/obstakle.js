@@ -39,6 +39,9 @@ export class TObstacle {
     get x() {
         return this.#spDown.x;
     }
+    get width() {
+        return this.#spDown.width;
+    }
 
     draw() {
         this.#spDown.draw(); 
