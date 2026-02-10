@@ -1,18 +1,57 @@
 "use strict";
-import { TSprite } from "libSprite";
-import { TColorButton } from "./colorButton.js";
+import { TPoint, TCircle } from "lib2d";
+import { ESpriteNumberJustifyType, TSprite, TSpriteButton } from "libSprite";
+import { TColorButton } from "./colorButton.js";  
+import { activateAudioContext } from "libSound";
+import { spawnColorButton, resetGame} from "./sequence.mjs";
 
 export class TGameBoard extends TSprite {  
     #colorButtons;
+    #gameInfo;
+    #isSoundEnabled;
+    #spfinalscore;
 
     constructor(aSpcvs, aSPI) {
         super(aSpcvs, aSPI.Background, 0, 0);
+        const center = new TPoint(
+            aSPI.Background.width / 2, 
+            aSPI.Background.height / 2);
+
         this.#colorButtons = [
-            new TColorButton(aSpcvs, aSPI.ButtonYellow),
-            new TColorButton(aSpcvs, aSPI.ButtonBlue),
-            new TColorButton(aSpcvs, aSPI.ButtonRed),
-            new TColorButton(aSpcvs, aSPI.ButtonGreen)
+            new TColorButton(aSpcvs, aSPI.ButtonYellow,center),  
+            new TColorButton(aSpcvs, aSPI.ButtonBlue,center),
+            new TColorButton(aSpcvs, aSPI.ButtonRed,center),
+            new TColorButton(aSpcvs, aSPI.ButtonGreen,center)
         ];
+        let posX = center.x - aSPI.ButtonStartEnd.width / 2;
+        let posY = center.y + aSPI.ButtonStartEnd.height / 2;
+
+
+        this.#gameInfo = new TSpriteButton(aSpcvs, aSPI.ButtonStartEnd, posX, posY);
+        this.#gameInfo.onClick = this.#gameInfoClick.bind(this);
+        this.#disableColorButtons(true);
+        this.#isSoundEnabled = false;
+        this.spRound = new TSprite(aSpcvs, aSPI.number, 405, 385);
+        this.spRound.justify = ESpriteNumberJustifyType.Right;
+        this.spRound.value = 0;
+        this.#spfinalscore = new TSprite(aSpcvs, aSPI.number, 360, 440);
+        this.#spfinalscore.justify = ESpriteNumberJustifyType.Center;
+        this.#spfinalscore.visible = false;
+    }
+get colorButtons() {
+    return this.#colorButtons;
+
+}
+gameOver() {
+    this.#disableColorButtons(true);
+    this.#gameInfo.index = 1;
+    this.#gameInfo.hidden = false;
+    this.#gameInfo.disabled = false;
+    this.#spfinalscore.value = this.spRound.value;
+    this.#spfinalscore.visible = true;
+
+
+
     }
     draw () {
         super.draw();
@@ -20,6 +59,31 @@ export class TGameBoard extends TSprite {
             const colorButton = this.#colorButtons[i];
             colorButton.draw();
         }
+        this.spRound.draw();
+        this.#gameInfo.draw();
+        this.#spfinalscore.draw();
     }
+    #disableColorButtons(aDisable) {
+        for (let i = 0; i < this.#colorButtons.length; i++) {
+            const colorButton = this.#colorButtons[i];
+            colorButton.disabled = aDisable;
+        }
 }
+#gameInfoClick() {
+    this.#gameInfo.disabled = true;
+    this.#gameInfo.hidden = true;
+    this.#disableColorButtons(false);
+    if (this.#isSoundEnabled === false) {
+        activateAudioContext();
+        this.#isSoundEnabled = true;
+        for (let i = 0; i < this.#colorButtons.length; i++) {
+            const colorButton = this.#colorButtons[i];
+            colorButton.createSound(i);
+        }
+}
+this.#spfinalscore.visible = false;
+resetGame();
+spawnColorButton();
 
+}
+}
