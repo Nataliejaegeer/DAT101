@@ -10,8 +10,60 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>What is an array?</li>
+  <p>
+    An array is a collection of values stored in a single variable. Each value has an index,
+    which starts at 0. Arrays are useful when we want to store multiple values in one place.
+  </p>
+
+  <li>What does it mean to "hardcode" when we talk about programming?</li>
+  <p>
+    Hardcoding means writing values directly into the code instead of getting them from input
+    or calculating them. For example, creating an array with fixed numbers instead of generating them.
+  </p>
+
+  <li>Explain in plain text what happens in task 3, and how we can traverse the array when we don't know the length.</li>
+  <p>
+    In task 3, we take a sentence and split it into an array of words. Then we loop through the array
+    and print each word with its index. When we don't know the length, we can use a loop with
+    array.length so it automatically stops at the end.
+  </p>
+
+  <li>Why is it beneficial to store instances of a class in arrays?</li>
+  <p>
+    It is useful because we can store multiple objects in one place and easily loop through them.
+    For example, storing books in an array makes it easier to print or manage them without writing
+    separate variables for each one.
+  </p>
+
+  <li>Explain the EWeekDays object and how it works.</li>
+  <p>
+    The EWeekDays object contains different types of days like weekdays and weekends.
+    The value attribute can be used to store extra information about each day.
+    WeekDay represents a single day, while Workdays and Weekends represent groups of days.
+    If we wanted to create WorkoutDays, it could look like an array with selected days like
+    Monday, Wednesday, and Thursday.
+  </p>
+
+  <li>Explain how a callback function works in sorting.</li>
+  <p>
+    A callback function is a function that is passed into another function.
+    In sorting, the callback decides how two values should be compared.
+    It returns a number that tells if one value should come before or after another.
+  </p>
+
+  <li>What happens in the sorting routines?</li>
+  <p>
+    The sorting function compares elements two at a time. Based on the result from the callback,
+    it decides the order. If the result is negative, the first element comes first.
+    If it is positive, the second element comes first.
+  </p>
+
+  <li>Explain what the first element of a two-dimensional array contains.</li>
+  <p>
+    The first element of a two-dimensional array is another array.
+    It represents the first row, and inside it are the columns.
+  </p>
     </ol>
     <script type="module" src="./task_4-2.mjs" defer></script>
   </body>
