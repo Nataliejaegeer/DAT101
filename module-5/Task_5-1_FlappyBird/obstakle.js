@@ -30,9 +30,8 @@ export class TObstacle {
     }
         
         this.#spDown = new TSprite(aSpcvs, aSPI, x, topWithGap);
-        this.#spDown.index = 2;
         this.#spUp = new TSprite(aSpcvs, aSPI, x, top);
-        this.#spUp.index = 3;
+        this.setDayMode(true);
     }
 
     //properties
@@ -48,6 +47,11 @@ export class TObstacle {
         this.#spUp.draw();
     }
 
+    setDayMode(aIsDayMode) {
+        this.#spDown.index = aIsDayMode ? 2 : 0;
+        this.#spUp.index = aIsDayMode ? 3 : 1;
+    }
+
     animate() {
         this.#spDown.x --;
         this.#spUp.x --;
@@ -58,7 +62,6 @@ export class TObstacle {
             console.log("Collision with Hero!");
             EGameStatus.state = EGameStatus.heroIsDead;
             hero.animationSpeed = 0;
-            menu.stopSound();
             hero.flap();//Last flap of death!
             hero.dead();
         }

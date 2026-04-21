@@ -37,44 +37,60 @@ export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
 const baits = [];
 export const menu = new TMenu(spcvs, SpriteInfoList);
-let obstaclePassed = false; 
+export let soundMuted = false;
+let isDayMode = true;
+let gameOverShown = false;
+let obstaclePassed = false;
 
 //--------------- Functions ----------------------------------------------//
 export function startGame() {
   EGameStatus.state = EGameStatus.gaming;
-  setTimeout(spanObstacle, 1000);
+  gameOverShown = false;
+  setTimeout(spawnObstacle, 1000);
   setTimeout(spawnBait, 1000);
+}
+
+export function resetWorld() {
+  hero.restart();
+  obstacles.length = 0;
+  baits.length = 0;
+  obstaclePassed = false;
+  gameOverShown = false;
+  menu.resetGameScore();
 }
 
 function spawnBait() {
   if (EGameStatus.state === EGameStatus.gaming) {
-  const bait = new TBait(spcvs, SpriteInfoList.food);
-  baits.push(bait);
-  const nextTime = Math.ceil(Math.random() * 3) + 1;
-  setTimeout(spawnBait, nextTime * 1000);
-  } 
+    const bait = new TBait(spcvs, SpriteInfoList.food);
+    baits.push(bait);
+    const nextTime = Math.ceil(Math.random() * 3) + 1;
+    setTimeout(spawnBait, nextTime * 1000);
+  }
 }
 
 function spawnObstacle() {
-  if(EGameStatus.state === EGameStatus.gaming) {
-  const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
-  obstacles.push(obstacle);
-  const nextTime = Math.ceil(Math.random() * 3) + 1;
-  setTimeout(spawnObstacle, nextTime * 1000);
+  if (EGameStatus.state === EGameStatus.gaming) {
+    const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
+    obstacle.setDayMode(isDayMode);
+    obstacles.push(obstacle);
+    const nextTime = Math.ceil(Math.random() * 3) + 1;
+    setTimeout(spawnObstacle, nextTime * 1000);
   }
 }
 
 function animateGame() {
   hero.animate();
+
   let eaten = -1;
   for (let i = 0; i < baits.length; i++) {
     const bait = baits[i];
     bait.animate();
-    if(bait.distanceTo(hero.center) < 20){
+    if (bait.distanceTo(hero.center) < 20) {
       eaten = i;
     }
   }
-  if(eaten >=0){
+
+  if (eaten >= 0) {
     console.log("Eaten!");
     baits.splice(eaten, 1);
     hero.eat();
@@ -83,27 +99,36 @@ function animateGame() {
   if (EGameStatus.state === EGameStatus.gaming) {
     background.animate();
     let deliteObstacle = false;
+
     for (let i = 0; i < obstacles.length; i++) {
       const obstacle = obstacles[i];
       obstacle.animate();
+
       if (obstacle.x < -50) {
         deliteObstacle = true;
         obstaclePassed = false;
-      }else if ((obstacle.width) < hero.x) {
+      } else if (obstacle.x + obstacle.width < hero.x) {
         if (!obstaclePassed) {
-        menu.incGameScore(1);
-        obstaclePassed = true;
+          menu.incGameScore(1);
+          obstaclePassed = true;
+        }
       }
     }
-    }
+
     if (deliteObstacle) {
       obstacles.splice(0, 1);
     }
+  }
+
+  if (EGameStatus.state === EGameStatus.gameOver && !gameOverShown) {
+    gameOverShown = true;
+    menu.showGameOver();
   }
 }
 
 function drawGame() {
   background.drawbackground();
+
   for (let i = 0; i < baits.length; i++) {
     const bait = baits[i];
     bait.draw();
@@ -113,6 +138,7 @@ function drawGame() {
     const obstacle = obstacles[i];
     obstacle.draw();
   }
+
   hero.draw();
   background.drawGround();
   menu.draw();
@@ -129,6 +155,8 @@ function loadGame() {
 
   // Start animate engine
   setInterval(animateGame, 10);
+  setSoundOnOff();
+  setDayNight({ target: { value: document.querySelector('input[name="rbDayNight"]:checked').value } });
 } // end of loadGame
 
 function onKeyDown(aEvent) {
@@ -143,14 +171,17 @@ function onKeyDown(aEvent) {
 } // end of onKeyDown
 
 function setSoundOnOff() {
-  // Mute or unmute the game sound based on checkbox
+  soundMuted = chkMuteSound.checked;
+  menu.setSoundMute(soundMuted);
 } // end of setSoundOnOff
 
 function setDayNight(aEvent) {
-  // Set day or night mode based on radio buttons
-  // Day mode is when value is 1, night mode is 0, you can use this as a boolean, 1=true, 0=false
-  // e.g., isDayMode = (aEvent.target.value == 1);
-  console.log(`Day/Night mode changed: ${aEvent.target.value}`);
+  isDayMode = aEvent.target.value == 1;
+  background.setDayMode(isDayMode);
+
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].setDayMode(isDayMode);
+  }
 } // end of setDayNight
 
 //--------------- Main Code ----------------------------------------------//
